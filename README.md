@@ -23,4 +23,18 @@ git init
 
 ```
 ---
+- Comado para agregar 
+```
+git add index.html
+
+```
+---
+---
+- Comado para agregar  varios archivos 
+```
+git add
+
+```
+---
+
 
