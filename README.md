@@ -36,5 +36,20 @@ git add
 
 ```
 ---
+---
+- Comado para hacer commit
+```
+git commit -m "Comentario para subir"
+
+```
+---
+---
+- Comado para conectar con repositorio 
+```
+git remote add origin URL_DEL_REPOSITORIO
+
+```
+---
+
 
 
