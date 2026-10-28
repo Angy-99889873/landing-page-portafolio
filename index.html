@@ -1,13 +1,712 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>INS-600 | Aprendiendo Git y GitHub</title>
+    <meta name="description"
+        content="Landing page del curso INS-600 de Ingeniería de Software. Aprendiendo Git, GitHub y control de versiones.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        :root {
+            --bg: #0f1026;
+            --bg-secondary: #15182b;
+            --card: #1f2237;
+            --primary: #4f9deb;
+            --accent: #22d3ee;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5f5;
+            --border: #2a2e55;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+                sans-serif;
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        body {
+            background: radial-gradient(circle at top, rgba(79, 157, 235, 0.12), transparent 55%),
+                var(--bg);
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(15, 16, 38, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0.9rem 1.5rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .logo-dot {
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--accent), var(--primary));
+            box-shadow: 0 0 0 8px rgba(34, 211, 238, 0.08);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.8rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.98rem;
+            transition: color 150ms ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a:focus {
+            color: var(--text-primary);
+        }
+
+        .nav-cta {
+            display: none;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            gap: 6rem;
+        }
+
+        .hero {
+            display: grid;
+            gap: 1.8rem;
+            text-align: center;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 7rem 1.5rem 0;
+        }
+
+        .eyebrow {
+            justify-self: center;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.4rem 1rem;
+            border-radius: 999px;
+            border: 1px solid rgba(34, 211, 238, 0.5);
+            background: radial-gradient(circle, rgba(34, 211, 238, 0.18), transparent);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 8vw, 5.2rem);
+            line-height: 1.02;
+            letter-spacing: -0.08em;
+            color: var(--text-primary);
+        }
+
+        .hero p {
+            justify-self: center;
+            max-width: 760px;
+            font-size: clamp(1.05rem, 2vw, 1.28rem);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-radius: 999px;
+            padding: 0.95rem 2.4rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 150ms ease, box-shadow 150ms ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            color: #0f1026;
+            box-shadow: 0 40px 70px -40px rgba(34, 211, 238, 0.9);
+        }
+
+        .btn-ghost {
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            background: transparent;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .stat-card {
+            display: grid;
+            gap: 0.4rem;
+            padding: 1.6rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border);
+            background: linear-gradient(180deg, rgba(79, 157, 235, 0.16) 0%, transparent 100%);
+            text-align: center;
+        }
+
+        .stat-card strong {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--text-primary);
+        }
+
+        section {
+            display: grid;
+            gap: 2.8rem;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-header {
+            display: grid;
+            gap: 0.8rem;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            letter-spacing: -0.06em;
+            color: var(--text-primary);
+        }
+
+        .section-header p {
+            justify-self: center;
+            max-width: 720px;
+            font-size: clamp(1rem, 2vw, 1.12rem);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.6rem;
+        }
+
+        .card {
+            position: relative;
+            display: grid;
+            gap: 1.2rem;
+            padding: 2.4rem;
+            border-radius: 1.2rem;
+            border: 1px solid var(--border);
+            background: radial-gradient(circle at top, rgba(79, 157, 235, 0.14), transparent 70%),
+                var(--card);
+            overflow: hidden;
+        }
+
+        .card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top right, rgba(34, 211, 238, 0.12), transparent 55%);
+            pointer-events: none;
+        }
+
+        .card>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.2rem;
+            height: 3.2rem;
+            border-radius: 999px;
+            background: linear-gradient(90deg, rgba(79, 157, 235, 0.9), rgba(34, 211, 238, 0.9));
+            color: #0f1026;
+            font-size: 1.4rem;
+        }
+
+        .card h3 {
+            color: var(--text-primary);
+            font-size: 1.6rem;
+            letter-spacing: -0.03em;
+        }
+
+        .list {
+            display: grid;
+            gap: 0.9rem;
+            list-style: none;
+        }
+
+        .list-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.9rem;
+        }
+
+        .list-dot {
+            margin-top: 0.5rem;
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 0 8px rgba(34, 211, 238, 0.1);
+        }
+
+        .split {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.8rem;
+            align-items: stretch;
+        }
+
+        .panel {
+            display: grid;
+            gap: 1.6rem;
+            padding: clamp(2rem, 6vw, 3.6rem);
+            border-radius: 1.4rem;
+            border: 1px solid var(--border);
+            background: linear-gradient(180deg, rgba(79, 157, 235, 0.16) 0%, var(--card) 100%);
+        }
+
+        .panel-header {
+            display: grid;
+            gap: 0.6rem;
+        }
+
+        .panel-header h3 {
+            color: var(--text-primary);
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            letter-spacing: -0.05em;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.4rem;
+        }
+
+        .team-card {
+            display: grid;
+            gap: 0.8rem;
+            text-align: center;
+            padding: 2.2rem 2rem;
+            border-radius: 1.2rem;
+            border: 1px solid var(--border);
+            background: var(--card);
+        }
+
+        .avatar {
+            justify-self: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 4.2rem;
+            height: 4.2rem;
+            border-radius: 50%;
+            background: linear-gradient(90deg, rgba(79, 157, 235, 0.9), rgba(34, 211, 238, 0.9));
+            color: #0f1026;
+            font-weight: 700;
+            font-size: 1.6rem;
+        }
+
+        .team-card h4 {
+            color: var(--text-primary);
+            font-size: 1.4rem;
+        }
+
+        .role {
+            justify-self: center;
+            padding: 0.4rem 0.9rem;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+
+        .cta {
+            display: grid;
+            gap: 1.6rem;
+            text-align: center;
+            max-width: 880px;
+            margin: 0 auto;
+            padding: clamp(3rem, 8vw, 4.8rem) 1.5rem;
+            border-radius: 1.6rem;
+            border: 1px solid var(--border);
+            background: radial-gradient(circle at top, rgba(34, 211, 238, 0.18), transparent 70%),
+                linear-gradient(180deg, rgba(79, 157, 235, 0.16) 0%, transparent 100%);
+        }
+
+        .cta h2 {
+            color: var(--text-primary);
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            letter-spacing: -0.07em;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            background: rgba(15, 16, 38, 0.9);
+        }
+
+        .footer-inner {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+            text-align: center;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .footer-meta {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            font-size: 0.98rem;
+        }
+
+        .footer-meta span+span::before {
+            content: "•";
+            margin-right: 0.8rem;
+            opacity: 0.4;
+        }
+
+        .footer-copy {
+            opacity: 0.6;
+        }
+
+        @media (max-width: 880px) {
+            .nav-links {
+                display: none;
+            }
+
+            .nav-cta {
+                display: inline-flex;
+            }
+        }
+    </style>
 </head>
+
 <body>
-   <h1>BIENVENIDO A INS_600</h1> 
-   <h2>APRENDIENDO GIT Y GITHUB</h2>
-   <p>  ESTA PAGINA ES MI LANDING PAGE </p>
+    <header>
+        <nav>
+            <a class="logo" href="#inicio">
+                <span class="logo-dot"></span>
+                <span>INS-600 | Ingeniería de Software</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#objetivos">Objetivos</a></li>
+                <li><a href="#contenido">Contenido</a></li>
+                <li><a href="#integrantes">Integrantes</a></li>
+                <li><a href="#docente">Docente</a></li>
+            </ul>
+            <a class="btn btn-ghost nav-cta" href="#contenido">Ver Temario</a>
+        </nav>
+    </header>
+    <main id="inicio">
+        <section class="hero">
+            <span class="eyebrow">
+                <i class="bi bi-git"></i>
+                Control de Versiones | Git & GitHub
+            </span>
+            <h1>BIENVENIDO A INS-600</h1>
+            <p>
+                Aprendiendo Git y GitHub para gestionar, versionar y colaborar en
+                proyectos de software de una manera profesional, ordenada y
+                eficiente.
+            </p>
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="#contenido">
+                    Comenzar a aprender
+                    <i class="bi bi-arrow-down"></i>
+                </a>
+                <a class="btn btn-ghost" href="https://github.com/" target="_blank" rel="noopener">
+                    Conocer GitHub
+                    <i class="bi bi-box-arrow-up-right"></i>
+                </a>
+            </div>
+        </section>
+        <div class="hero-grid">
+            <article class="stat-card">
+                <strong>Git</strong>
+                <span>Sistema de control de versiones distribuido</span>
+            </article>
+            <article class="stat-card">
+                <strong>GitHub</strong>
+                <span>Plataforma para alojar y colaborar en repositorios</span>
+            </article>
+            <article class="stat-card">
+                <strong>Trabajo Colaborativo</strong>
+                <span>Flujos de trabajo profesionales para equipos</span>
+            </article>
+        </div>
+        <section id="objetivos">
+            <div class="section-header">
+                <span class="eyebrow">Propósito del curso</span>
+                <h2>Objetivos de Aprendizaje</h2>
+                <p>
+                    Al finalizar este espacio práctico, seremos capaces de aplicar
+                    buenas prácticas con Git y GitHub en el desarrollo de
+                    proyectos reales.
+                </p>
+            </div>
+            <div class="grid">
+                <article class="card">
+                    <span class="card-icon">
+                        <i class="bi bi-diagram-3"></i>
+                    </span>
+                    <h3>Comprender el Control de Versiones</h3>
+                    <p>
+                        Identificar la importancia del versionado, sus ventajas y
+                        cómo Git soluciona el seguimiento de cambios en el código
+                        fuente.
+                    </p>
+                </article>
+                <article class="card">
+                    <span class="card-icon">
+                        <i class="bi bi-terminal"></i>
+                    </span>
+                    <h3>Dominar Comandos Fundamentales</h3>
+                    <p>
+                        Aprender a inicializar, agregar, confirmar, vincular y
+                        sincronizar repositorios utilizando la línea de comandos.
+                    </p>
+                </article>
+                <article class="card">
+                    <span class="card-icon">
+                        <i class="bi bi-people"></i>
+                    </span>
+                    <h3>Colaborar con GitHub</h3>
+                    <p>
+                        Utilizar repositorios remotos, ramas, y el flujo de
+                        trabajo colaborativo para integrar cambios entre
+                        integrantes del equipo.
+                    </p>
+                </article>
+            </div>
+        </section>
+        <section id="contenido">
+            <div class="section-header">
+                <span class="eyebrow">Ruta de Aprendizaje</span>
+                <h2>Contenido Práctico</h2>
+                <p>
+                    Temario desarrollado paso a paso con ejercicios prácticos para
+                    afianzar cada comando.
+                </p>
+            </div>
+            <div class="split">
+                <article class="panel">
+                    <div class="panel-header">
+                        <span class="eyebrow">Módulo 1</span>
+                        <h3>Fundamentos de Git</h3>
+                        <p>
+                            Introducción al sistema de control de versiones y
+                            configuración inicial del entorno de trabajo.
+                        </p>
+                    </div>
+                    <ul class="list">
+                        <li class="list-item">
+                            <span class="list-dot"></span>
+                            <div>
+                                <strong>¿Qué es Git?</strong>
+                                <p>Conceptos, historia, ventajas y diferencias con otros sistemas.</p>
+                            </div>
+                        </li>
+                        <li class="list-item">
+                            <span class="list-dot"></span>
+                            <div>
+                                <strong>Inicialización de repositorio</strong>
+                                <p><code>git init</code> - Creando nuestro primer repositorio local.</p>
+                            </div>
+                        </li>
+                        <li class="list-item">
+                            <span class="list-dot"></span>
+                            <div>
+                                <strong>Seguimiento de archivos</strong>
+                                <p><code>git add</code>, <code>git status</code> y área de staging.</p>
+                            </div>
+                        </li>
+                        <li class="list-item">
+                            <span class="list-dot"></span>
+                            <div>
+                                <strong>Confirmación de cambios</strong>
+                                <p><code>git commit -m "mensaje"</code> y buenas prácticas en mensajes.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </article>
+                <article class="panel">
+                    <div class="panel-header">
+                        <span class="eyebrow">Módulo 2</span>
+                        <h3>GitHub y Colaboración</h3>
+                        <p>
+                            Conexión con repositorios remotos, sincronización y
+                            trabajo en equipo.
+                        </p>
+                    </div>
+                    <ul class="list">
+                        <li class="list-item">
+                            <span class="list-dot"></span>
+                            <div>
+                                <strong>Creación de repositorio remoto</strong>
+                                <p>Configuración y vinculación entre local y remoto.</p>
+                            </div>
+                        </li>
+                        <li class="list-item">
+                            <span class="list-dot"></span>
+                            <div>
+                                <strong>Conexión con origen</strong>
+                                <p><code>git remote add origin &lt;URL_DEL_REPOSITORIO&gt;</code></p>
+                            </div>
+                        </li>
+                        <li class="list-item">
+                            <span class="list-dot"></span>
+                            <div>
+                                <strong>Subida de cambios</strong>
+                                <p><code>git push</code> - Sincronizando nuestro código con GitHub.</p>
+                            </div>
+                        </li>
+                        <li class="list-item">
+                            <span class="list-dot"></span>
+                            <div>
+                                <strong>Descarga y actualización</strong>
+                                <p><code>git pull</code>, <code>git clone</code> y resolución básica de conflictos.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+        <section id="integrantes">
+            <div class="section-header">
+                <span class="eyebrow">Equipo de Trabajo</span>
+                <h2>Integrantes</h2>
+                <p>Estudiantes que forman parte del presente ejemplo práctico.</p>
+            </div>
+            <div class="team-grid">
+                <article class="team-card">
+                    <span class="avatar">PA</span>
+                    <div>
+                        <h4>Paula Alvarez</h4>
+                        <p>Estudiante - Ingeniería de Software</p>
+                    </div>
+                    <span class="role">Integrante</span>
+                </article>
+                <article class="team-card">
+                    <span class="avatar">LA</span>
+                    <div>
+                        <h4>Leticia Aquice</h4>
+                        <p>Estudiante - Ingeniería de Software</p>
+                    </div>
+                    <span class="role">Integrante</span>
+                </article>
+                <article class="team-card">
+                    <span class="avatar">AM</span>
+                    <div>
+                        <h4>Angela Mamani</h4>
+                        <p>Estudiante - Ingeniería de Software</p>
+                    </div>
+                    <span class="role">Integrante</span>
+                </article>
+            </div>
+        </section>
+        <section id="docente">
+            <div class="section-header">
+                <span class="eyebrow">Guía Académica</span>
+                <h2>Docente</h2>
+            </div>
+            <div class="team-grid" style="justify-content: center">
+                <article class="team-card" style="max-width: 360px">
+                    <span class="avatar">EH</span>
+                    <div>
+                        <h4>Lic. Erik Huallpa</h4>
+                        <p>Docente de Ingeniería de Software - INS-600</p>
+                    </div>
+                    <span class="role">Docente Guía</span>
+                </article>
+            </div>
+        </section>
+        <section>
+            <div class="cta">
+                <span class="eyebrow">Práctica, orden y colaboración</span>
+                <h2>Esta página es mi Landing Page</h2>
+                <p>
+                    Un primer paso para entender cómo funciona el control de
+                    versiones. Cada commit nos acerca más a escribir código
+                    profesional, trazable y colaborativo.
+                </p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="#inicio">
+                        Volver al inicio
+                        <i class="bi bi-arrow-up"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-inner">
+            <a class="logo" href="#inicio">
+                <span class="logo-dot"></span>
+                <span>INS-600 | Aprendiendo Git y GitHub</span>
+            </a>
+            <div class="footer-meta">
+                <span>Ingeniería de Software</span>
+                <span>Gestión: II-2026</span>
+                <span>Universidad / Carrera</span>
+            </div>
+            <p class="footer-copy">
+                &copy; 2026 INS-600. Elaborado con fines académicos para el
+                aprendizaje de Git y GitHub.
+            </p>
+        </div>
+    </footer>
 </body>
+
 </html>
